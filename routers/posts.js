@@ -1,35 +1,9 @@
-const express = require("express");
-const cors = require("cors");
+const router = require("express").Router();
 const { PrismaClient } = require("@prisma/client");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 require("dotenv").config();
 
-const app = express();
 const prisma = new PrismaClient();
-
-// CORSの設定
-const allowedOrigins = [
-  "https://udemy-sns-client-6ts8yantm-aya-igarashis-projects.vercel.app",
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
-    credentials: true,
-  })
-);
-
-app.use(express.json()); // リクエストボディのJSONパース
-
-const router = express.Router();
 
 // つぶやき投稿用API
 router.post("/post", isAuthenticated, async (req, res) => {
@@ -111,9 +85,4 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-app.use("/api", router);
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+module.exports = router;
