@@ -28,9 +28,9 @@ app.use(
 app.use(express.json()); // JSONパーシングのためのミドルウェア
 
 // ルートとその他の設定
-app.use("/api/auth", require("./api/routers/auth"));
-app.use("/api/posts", require("./api/routers/posts"));
-app.use("/api/users", require("./api/routers/users"));
+app.use("/api/auth", require("./routers/auth"));
+app.use("/api/posts", require("./routers/posts"));
+app.use("/api/users", require("./routers/users"));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
