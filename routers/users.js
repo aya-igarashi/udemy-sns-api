@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const isAuthenticated = require("../middlewares/isAuthenticated");
-const supabase = require("../utils/supabaseClient");
+import supabase from "../utils/supabaseClient";
 
 router.get("/find", isAuthenticated, async (req, res) => {
   const { data: user, error } = await supabase

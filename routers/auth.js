@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const generatedIdenticon = require("../utils/generateIdenticon");
-const { supabase } = require("../utils/supabaseClient");
+import supabase from "../utils/supabaseClient";
 
 // 新規ユーザー登録API
 router.post("/register", async (req, res) => {
