@@ -56,6 +56,7 @@ router.post("/login", async (req, res) => {
 
 module.exports = router;
 
+// prismaを使用する場合
 // const router = require("express").Router();
 // const { PrismaClient } = require("@prisma/client");
 // const bcrypt = require("bcrypt");
