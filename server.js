@@ -7,6 +7,7 @@ const app = express();
 // CORSの設定
 const allowedOrigins = [
   "https://udemy-sns-client-6ts8yantm-aya-igarashis-projects.vercel.app",
+  "https://udemy-sns-client-three.vercel.app",
 ];
 
 app.use(
