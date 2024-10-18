@@ -1,9 +1,3 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
-
-const app = express();
-
 // CORSの設定
 const allowedOrigins = [
   "https://udemy-sns-client-6ts8yantm-aya-igarashis-projects.vercel.app",
@@ -13,30 +7,61 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // 受け入れるオリジンを許可
+      // originが存在しない場合（ローカルリクエストなど）を許可
       if (!origin) return callback(null, true);
+
+      // 受け入れるオリジンのみ許可
       if (allowedOrigins.indexOf(origin) === -1) {
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
+        const msg = `CORSポリシーにより、Origin (${origin}) からのアクセスは許可されていません。`;
         return callback(new Error(msg), false);
       }
+
+      // 許可されたOriginの場合
       return callback(null, true);
     },
-    credentials: true,
+    credentials: true, // クッキーなどを含むリクエストを許可
   })
 );
 
-app.use(express.json()); // JSONパーシングのためのミドルウェア
+// const express = require("express");
+// const cors = require("cors");
+// require("dotenv").config();
 
-// ルートとその他の設定
-app.use("/api/auth", require("./routers/auth"));
-app.use("/api/posts", require("./routers/posts"));
-app.use("/api/users", require("./routers/users"));
+// const app = express();
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// // CORSの設定
+// const allowedOrigins = [
+//   "https://udemy-sns-client-6ts8yantm-aya-igarashis-projects.vercel.app",
+//   "https://udemy-sns-client-three.vercel.app",
+// ];
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // 受け入れるオリジンを許可
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         const msg =
+//           "The CORS policy for this site does not allow access from the specified Origin.";
+//         return callback(new Error(msg), false);
+//       }
+//       return callback(null, true);
+//     },
+//     credentials: true,
+//   })
+// );
+
+// app.use(express.json()); // JSONパーシングのためのミドルウェア
+
+// // ルートとその他の設定
+// app.use("/api/auth", require("./routers/auth"));
+// app.use("/api/posts", require("./routers/posts"));
+// app.use("/api/users", require("./routers/users"));
+
+// const port = process.env.PORT || 3000;
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
 
 // const express = require("express");
 // const app = express();
